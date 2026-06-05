@@ -1,0 +1,64 @@
+<?php
+/**
+ * Customer dashboard addresses block template
+ * Modified to hide empty address sections
+ */
+/** @var $block \Magento\Customer\Block\Address\Dashboard */
+?>
+
+<?php
+// Varsayılan faturalama adresini al
+$defaultBillingAddress = $block->getDefaultBillingAddress();
+// Varsayılan kargo adresini al
+$defaultShippingAddress = $block->getDefaultShippingAddress();
+
+// Eğer her iki adres de boş ise bloğu tamamen gizle
+if (!$defaultBillingAddress && !$defaultShippingAddress) {
+    return;
+}
+?>
+
+<div class="block block-dashboard-addresses">
+    <div class="block-title">
+        <strong><?= $block->escapeHtml(__('Address Book')) ?></strong>
+    </div>
+    <div class="block-content">
+        <p class="info empty">
+            <a href="<?= $block->escapeUrl($block->getAddressEditUrl()) ?>" class="action add">
+                <span><?= $block->escapeHtml(__('Add New Address')) ?></span>
+            </a>
+        </p>
+
+        <?php if ($defaultBillingAddress): ?>
+            <div class="box box-address-billing">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Default Billing Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <?= $block->getAddressHtml($defaultBillingAddress) ?>
+                    <div class="actions">
+                        <a href="<?= $block->escapeUrl($block->getAddressEditUrl($defaultBillingAddress)) ?>" class="action edit">
+                            <span><?= $block->escapeHtml(__('Edit Address')) ?></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($defaultShippingAddress): ?>
+            <div class="box box-address-shipping">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Default Shipping Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <?= $block->getAddressHtml($defaultShippingAddress) ?>
+                    <div class="actions">
+                        <a href="<?= $block->escapeUrl($block->getAddressEditUrl($defaultShippingAddress)) ?>" class="action edit">
+                            <span><?= $block->escapeHtml(__('Edit Address')) ?></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

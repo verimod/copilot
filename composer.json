@@ -1,0 +1,26 @@
+{
+  "name": "verimod/magento2-hide-empty-addresses",
+  "description": "Hide empty address blocks on customer dashboard in Magento 2",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Verimod",
+      "email": "info@verimod.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4.0",
+    "magento/framework": ">=102.0.0",
+    "magento/module-customer": ">=102.0.0"
+  },
+  "autoload": {
+    "files": [
+      "app/code/Verimod/HideEmptyAddresses/registration.php"
+    ],
+    "psr-4": {
+      "Verimod\\HideEmptyAddresses\\": "app/code/Verimod/HideEmptyAddresses"
+    }
+  }
+}

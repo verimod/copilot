@@ -12,7 +12,7 @@ $defaultBillingAddress = $block->getDefaultBillingAddress();
 // Varsayılan kargo adresini al
 $defaultShippingAddress = $block->getDefaultShippingAddress();
 
-// Eğer her iki adres de boş ise bloğu tamamen gizle
+// Eğer her iki adres de boş ise bloğun tamamını gizle
 if (!$defaultBillingAddress && !$defaultShippingAddress) {
     return;
 }
@@ -21,14 +21,12 @@ if (!$defaultBillingAddress && !$defaultShippingAddress) {
 <div class="block block-dashboard-addresses">
     <div class="block-title">
         <strong><?= $block->escapeHtml(__('Address Book')) ?></strong>
+        <a href="<?= $block->escapeUrl($block->getAddressBookUrl()) ?>" class="action">
+            <span><?= $block->escapeHtml(__('Manage Addresses')) ?></span>
+        </a>
     </div>
     <div class="block-content">
-        <p class="info empty">
-            <a href="<?= $block->escapeUrl($block->getAddressEditUrl()) ?>" class="action add">
-                <span><?= $block->escapeHtml(__('Add New Address')) ?></span>
-            </a>
-        </p>
-
+        <!-- Default Billing Address - Sadece varsa göster -->
         <?php if ($defaultBillingAddress): ?>
             <div class="box box-address-billing">
                 <strong class="box-title">
@@ -45,6 +43,7 @@ if (!$defaultBillingAddress && !$defaultShippingAddress) {
             </div>
         <?php endif; ?>
 
+        <!-- Default Shipping Address - Sadece varsa göster -->
         <?php if ($defaultShippingAddress): ?>
             <div class="box box-address-shipping">
                 <strong class="box-title">
